@@ -1,0 +1,23 @@
+# Dependencies
+markdown:         redcarpet
+highlighter:      pygments
+
+# Permalinks
+permalink:        pretty
+relative_permalinks: true
+
+# Setup
+title:            _msilb
+tagline:          'Michael Silbermann'
+description:      'Functional Programming, Web Development, Trading & Quantitative Finance'
+url:              http://msilb.com
+baseurl:          /
+
+author:
+  name:           'Michael Silbermann'
+  url:            http://msilb.com
+
+paginate:         5
+
+github:
+  repo:           https://github.com/msilb
