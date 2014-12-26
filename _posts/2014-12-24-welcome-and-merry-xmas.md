@@ -1,6 +1,7 @@
 ---
 layout: post
 title: Welcome and Merry X-Mas!
+comments: true
 ---
 
 I would like to welcome you all on my new website. In this blog you will find posts on topics related to things I know best, namely functional programming (Scala in particular), web development, world of finance and trading. I will also occasionally post here photos from my trips around the world. Meanwhile feel free to check out my projects on GitHub:
