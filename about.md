@@ -3,7 +3,7 @@ layout: page
 title: About Me
 ---
 
-My name is Michael Silbermann and my particular areas of interest are functional programming in Scala, web development, designing robust and scalable trading systems, and photography. All of these topics contain both the elements of art and functon, which is exactly the reason why I am attracted to them.
+My name is Michael Silbermann and my particular areas of interest are functional programming in Scala, web development, designing robust and scalable trading systems, and photography. All of these topics contain both the elements of art and function, which is exactly the reason why I am attracted to them.
 
 ## Current Projects
 
@@ -12,4 +12,4 @@ My name is Michael Silbermann and my particular areas of interest are functional
 
 ## Contact Details
 
-Feel free to drop me a [line](mailto:me@msilb.com) or contact me via [LinkedIn](https://ch.linkedin.com/in/msilbermann).
+Feel free to [mail](mailto:me@msilb.com) me or contact me via [LinkedIn](https://ch.linkedin.com/in/msilbermann).
