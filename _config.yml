@@ -1,23 +1,62 @@
-# Dependencies
-markdown:         redcarpet
-highlighter:      pygments
+# Harmony Jekyll theme general configurations 
+
+# Base URL
+baseurl: 
+
+# Site live URL
+url: http://msilb.com
+
+# Localhost 
+# url: http://127.0.0.1:4000
+
+# Harmony theme configuration. Please change accordingly.
+harmony:
+  name: _msilb
+  # Little description about your site
+  description: Functional Programming, Web Development, Trading & Quantitative Finance
+  # 'meta_description:' Write an awesome description for your new site here.
+  # It will appear in your document head meta (for Google search results) and 
+  # in your feed.xml site description.
+  meta_description: > # 
+   Michael Silbermann's Blog on Functional Programming, Web Development, Trading & Quantitative Finance
+  basetheme: theme-base-01 # pre defined thmes are darken, blue-water, redish.
+  author: # Author details
+    name: Michael Silbermann
+    email: me@msilb.com
+    url: http://msilb.com
+
+  # Google Analytics key, leave blank to ignore
+  google_analytics_key: UA-58023443-1
+
+  # Profile links, leave blank to ignore
+  social: 
+    github: msilb
+    twitter: m_silb
+    facebook: michael.silbermann
+    gplus: +MichaelSilbermann
+    dribble: 
+    pinterest: 
+  # Toggle disclaimer in footer
+  show_disclaimer: false
+
+# Conversion / Build settings 
+markdown:    kramdown
+# This is how you put pygments config in jekyll 2.0 instead of pygments: true
+highlighter: pygments 
 
 # Permalinks
 permalink:        pretty
-relative_permalinks: true
 
-# Setup
-title:            _msilb
-tagline:          'Michael Silbermann'
-description:      'Functional Programming, Web Development, Trading & Quantitative Finance'
-url:              http://msilb.com
-baseurl:          /
+exclude: 
+  - CNAME
+  - Gemfile
+  - Rakefile
+  - README.md
+  - .gitignore
+  - .sass-cache
+  - Gemfile.lock
 
-author:
-  name:           'Michael Silbermann'
-  url:            http://msilb.com
-
-paginate:         5
-
-github:
-  repo:           https://github.com/msilb
+# Sass conversion configs
+sass:
+    sass_dir: assets/css/_sass
+    style: :compressed
