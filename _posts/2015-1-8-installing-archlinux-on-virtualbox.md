@@ -1,14 +1,14 @@
 ---
 layout: post
-title: Installing ArchLinux on VirtualBox
+title: Installing Arch Linux on VirtualBox
 comments: true
 ---
 
-Let's assume you love your Linux terminal to get things done (like I do). Let's also assume that the firm you're working for is forcing you to use Windows. Bugger! What are you gonna do now? One option would be to use Cygwin, but unfortunately, it is just a Linux terminal emulator still based on Windows and very [buggy](http://imgur.com/r/linux/var30) on top of that. A better solution would be to install a clean Linux distribution inside a virtual machine. And this is exactly what I would like to share with you today, namely some tips on how to install a distribution of [ArchLinux](http://archlinux.org) on [VirtualBox](http://virtualbox.org).
+Let's assume you love your Linux terminal to get things done (like I do). Let's also assume that the firm you're working for is forcing you to use Windows. Bugger! What are you gonna do now? One option would be to use Cygwin, but unfortunately, it is just a Linux terminal emulator still based on Windows and very [buggy](http://imgur.com/r/linux/var30) on top of that. A better solution would be to install a clean Linux distribution inside a virtual machine. And this is exactly what I would like to share with you today, namely some tips on how to install a distribution of [Arch Linux](http://archlinux.org) on [VirtualBox](http://virtualbox.org).
 
 Just follow these steps and you should be good to go:
 
-1. Download the latest versions of [ArchLinux](http://archlinux.org) and [VirtualBox](http://virtualbox.org).
+1. Download the latest versions of [Arch Linux](http://archlinux.org) and [VirtualBox](http://virtualbox.org).
 2. You will probably lose network connectivity. Go to Network settings, disable VirtualBox network adapter. Repair Windows connection and then re-enable VirtualBox network adapter.
 3. Create a "New Virtual Machine" in VirtualBox.
 	1. Give it a name of your choice.
