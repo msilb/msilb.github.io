@@ -1,6 +1,6 @@
 ---
 layout: post
-title: Installing ArchLinux on VirtualBox
+title: Installing Arch Linux on VirtualBox
 comments: true
 ---
 
