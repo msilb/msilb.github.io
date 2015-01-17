@@ -7,6 +7,7 @@ My name is Michael Silbermann and my particular areas of interest are functional
 
 ## Current Projects
 
+* [Scalanda](https://github.com/msilb/scalanda) - Scala/Akka wrapper around Oanda REST and Stream API
 * [Akka Trading](https://github.com/msilb/akka-trading) - Scala Backtesting + Oanda REST API Trading Framework built on top of Akka/Spray
 * [QuantCloud Web](https://github.com/msilb/quantcloud-web) - Experimental HTML5 front-end for yield curve calculation engine, based on gridster.js and Highcharts
 
