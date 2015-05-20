@@ -10,7 +10,7 @@ I don't want to go too much into detail on how it works, you can read up on that
 In this post I would like to offer you some guidance on how to use Oanda as a broker for executing algorithmic / automated trading strategies.
 
 Oanda's new REST-based [API](http://developer.oanda.com/rest-live/introduction) can be used with any language in order to connect to Oanda's servers and fetch market data, place orders, etc.
-There main downsides to using the REST API directly is that it is not type-safe.
+The main downside to using the REST API directly is that it is not type-safe.
 For instance, if you look at some of their examples using `curl` you will notice that all input parameters and returned values are essentially strings, even if the actual value is a number or a boolean or an enumeration.
 This may be ok for simple testing but in a large trading application this will most certainly become a source for all kinds of bugs that are hard to track down.
 That's why I created a Scala wrapper for Oanda's API called [Scalanda](https://github.com/msilb/scalanda), which provides a type-safe domain model for all input and output values.
