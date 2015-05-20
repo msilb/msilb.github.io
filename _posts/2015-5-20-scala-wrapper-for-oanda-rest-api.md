@@ -43,7 +43,7 @@ def pipelineFuture[T <: Response](implicit unmarshaller: FromResponseUnmarshalle
 {% endhighlight %}
 
 This probably requires some explanation.
-As you can see here I am defining the so-called pipeline `Future`, which will be the base routing for processing all HTTP requests and receiving responses.
+As you can see here I am defining the so-called pipeline `Future`, which will be the base routine for processing all HTTP requests and receiving responses.
 Essentially, what happens here is that first of all a new HTTP connection is established to Oanda's server using the URL specific for the selected environment (Sandbox, Practice or Production).
 Also depending on the environment we need to send the authentication token.
 Once the connection is successfully established, we return the `Future` of type `HttpRequest => Future[T]` denoting a function from `HttpRequest` to a `Future` of type `T`, where `T` is a sub-class of `Response`.
