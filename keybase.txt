@@ -1,0 +1,68 @@
+==================================================================
+https://keybase.io/msilb
+--------------------------------------------------------------------
+
+I hereby claim:
+
+  * I am an admin of http://msilb.com
+  * I am msilb (https://keybase.io/msilb) on keybase.
+  * I have a public key with fingerprint 8D00 5375 765A 8F0A 510D  212C E146 925B F63C 5707
+
+To do so, I am signing this object:
+
+{
+    "body": {
+        "key": {
+            "eldest_kid": "0101c85c9f1c4232c83abd48e802367101a30d0a631b80be83f674150cda2f1e84d30a",
+            "fingerprint": "8d005375765a8f0a510d212ce146925bf63c5707",
+            "host": "keybase.io",
+            "key_id": "e146925bf63c5707",
+            "kid": "0101c85c9f1c4232c83abd48e802367101a30d0a631b80be83f674150cda2f1e84d30a",
+            "uid": "5d8422afc9653bc0fa1eef0c8cdd9019",
+            "username": "msilb"
+        },
+        "service": {
+            "hostname": "msilb.com",
+            "protocol": "http:"
+        },
+        "type": "web_service_binding",
+        "version": 1
+    },
+    "ctime": 1468980977,
+    "expire_in": 157680000,
+    "prev": "1d6b145333bd7af6b976a31570f0ca50e68ea3d73dcb66d4404379ebe0b7fc8b",
+    "seqno": 5,
+    "tag": "signature"
+}
+
+which yields the signature:
+
+-----BEGIN PGP MESSAGE-----
+Version: Keybase OpenPGP v2.0.53
+Comment: https://keybase.io/crypto
+
+yMIbAnicrVJJSFVRGH5maopRmyYksUsjmJ5zzx3OfUajCG9REoUaGI8z3edNfff5
+7nUosYGCLCEtN7UpSSjCoAFpEYU2SQPSpjIqbVGumssSG6hzpaBFy87mcP7/+77z
+/R//zempoayUrCvtE3OGxpel3LvWUR8qPzTyoVmhLt+uhJuVajF5iRouPD9a7XAl
+rAAIIMM6s2zINBWpDCNCuYYFBioyTNklCHBADAQpBlRgZBumBnXAOFFtKLDGESBK
+vmI78ZhIJpJO3JeymAOgI1M3DZ1gGxAdAq5ClQmoGZaqU9tATDeBKYlVrhcwpDlK
+PFHguLImH9FJe//A/2ff9ZNyOseaqhKbWYaOKAM2gULYgGHGuQWgFQA9kYyTWiHR
+tZ5TQ5WWfEWWGhwmglSDMf5uFzC3VrISSdd3mVsjy1W+nwgHLH97IoA1Chr9LRCl
+TpzLACWhQSQ9x40rYSiRzHcCRRkCtjCwTDNfEU0JJymiToCQ8WIgT/CNaJCSkBsU
+ajpCiHKT2Aa1TIMgiQNyFqIDYWBBEDcRZ9QwuKYBDZmWoAJQ02aYKsFIdXFXCevS
+JolJSc+JxYlfnxRKy/X+yqmhlKxQetqUYLFCWZkz/6xbxVjGj5zwI2P/prKDJy6s
+eVG8fMbQydVFXya+j57SlpzpDUVmWiXP2bS+Y7bXv+sHfL370K7H2bsf5sWMNcdK
+P766+m1x1/jDL3gF3JFeuLR0/NrEzZJXlffPvO9hPaD49OzUu3u7sBhoi1xs7T85
+uuzNnapPC5veHbjsZHTwxkWFXvPA43lHWmsjbd+8zmcT8TrlayR7JKfeTH/UOHw8
+G7+NvZgFh/cM7enesnXUe7l+1Xh33+CKo20/7QdP29H83NYneYf3pVWem7uWlQ6U
+l++8EXmzrjBT+9xDO4fmVW88LxZsK5tyoPrDre5tTwY3Jzb4K0eqMoouDShnOzYf
+r1i1ILd3rPP2LwGCQdg=
+=Juz8
+-----END PGP MESSAGE-----
+
+And finally, I am proving ownership of this host by posting or
+appending to this document.
+
+View my publicly-auditable identity here: https://keybase.io/msilb
+
+==================================================================
