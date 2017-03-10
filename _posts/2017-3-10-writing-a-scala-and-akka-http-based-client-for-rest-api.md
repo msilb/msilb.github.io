@@ -4,7 +4,7 @@ title: Writing a Scala and Akka-HTTP based client for REST API
 comments: true
 ---
 
-And so I decided to write another HTTP Client using Scala. Sounds easy? Sure, if you know where to start. As with so many things in the Scala world, picking your libraries can be the hardest part. In this post I'll try to make the experience of writing a HTTP client library in Scala a less painful experience so you don't have to start from scratch. Ok, enough introduction, let's start!
+And so I decided to write another HTTP Client using Scala. Sounds easy? Sure, if you know where to start. As with so many things in the Scala world, picking your libraries can be the hardest part. In this post I'll try to make the experience of writing a HTTP client library in Scala a little less painful so you don't have to start from scratch. Ok, enough introduction, let's start!
 
 In my particular use case I wanted to develop a type-safe HTTP client library for consuming Oanda REST API v20. You can have a look at the [API spec](http://developer.oanda.com/rest-live-v20/introduction) if you want to learn more about specific protocol but here we want to focus on getting the right tools to get the job done.
 
@@ -21,3 +21,5 @@ import io.circe.generic.auto._
 ```
 
 The rest is magically taken care of by Scala macros generating implicit instances of `Encoder` and `Decoder` objects. Looks good on paper, BUT: macros are not the most stable part of the Scala compiler (as we'll see in a second) and it will slow down your compilation by A LOT (at one point my [project](https://github.com/msilb/scalanda-v20) took 12 minutes to compile). Now, one particular issue I encountered when using fully automatic derivation is that circe is using [shapeless](https://github.com/milessabin/shapeless) under the hood to derive `Encoder` and `Decoder` instances, which in turn relies on Scala macros. This foundation seems to be not very rock solid though. Things like [this](https://issues.scala-lang.org/browse/SI-7046), [this](https://issues.scala-lang.org/browse/SI-7567) and [this](https://github.com/lloydmeta/enumeratum/issues/90) do not fill one with confidence. In fact, I encountered the same error as the author of the last linked github issue: `knownDirectSubclasses observed before subclass registered` and it just seemed completely random depending on in which file my case classes were defined and similar things. Only switching to a more reliable semi-automatic derivation using `Codec` annotation finally stabilized the build. However, the build still takes about 3-4 minutes to complete. I am thinking about abandoning `shapeless` backed derivation altogether and using more manual ways to define my `Encoder`s and `Decoder`s in order to speed up the compilation. This however, will bring back the boilerplate. Tradeoffs, it's always about tradeoffs.
+
+TBC...
