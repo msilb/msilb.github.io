@@ -1,6 +1,6 @@
 ---
 layout: post
-title: Writing a Scala and Akka-HTTP based client for REST API
+title: Writing a Scala and Akka-HTTP based client for REST API (Part I)
 comments: true
 ---
 
@@ -91,4 +91,4 @@ def getAccountsList: Future[AccountsListResponse] = {
 }
 ```
 
-As you can see here the entire communication chain is asynchronous and we're only operating with futures throughout. This is one of the advantages of Akka HTTP as it allows us to build our communication in a completely async manner without unnecessary blocking/waiting on the response to be received or unmarshalling to complete.
+As you can see here the entire communication chain is asynchronous and we're only operating with futures throughout. This is one of the advantages of Akka HTTP as it allows us to build our communication in a completely async manner without unnecessary blocking/waiting on the response to be received or unmarshalling to complete. This will especially come in handy when I show you later how to process responses with chunked transfer encoding and map them as streams of data. Stay tuned for Part II.
