@@ -56,4 +56,39 @@ object Response {
 
 Now let's have a close look at the signature of the `decodeSuccessOrFailure` function. It takes 3 type parameters: `T` is our base trait for a particular type of API response, `S` is mapping a successful response, and `F` a failure, both must be subtypes of `T` as indicated by the `<:` symbol. `: Decoder` is simply a Scala syntactic sugar for a so-called _implicit evidence_ parameter `implicit d: Decoder[T]`. This is required to let the compiler know that we can only accept type parameter `T` for which we have an implicit `Decoder` instance defined somewhere in scope. Ok, let's move on. So, when we receive our JSON object from the remote call, the compiler doesn't know whether it's a success or failure and which case class should the response be decoded into. We need to help it a little. For instance, we might infer from the structure of the JSON that the response is an error response. In this case we know that all error responses _must_ contain the field `errorMessage`, hence we attempt to decode the appropriate subtype of `T` depending on whether `errorMessage` is present in our JSON object or not.
 
-TBC...
+Once we sorted out decoding of our response we can turn our eyes on the HTTP request/response workflow. Akka HTTP provides some capabilities for [unmarshalling](http://doc.akka.io/docs/akka-http/current/scala/http/common/unmarshalling.html) HTTP response entities. It can unmarshall HTTP response entities into `String`, `Int`, `List` and other basic types and in the simplest case all that's required to fetch a String response from our HTTP endpoint is this line of code `Http().singleRequest(req).flatMap(r => Unmarshal(r.entity).to[String])`. But what about our custom case classes, what if we want to unmarshal HTTP response not into `String` but directly into our subtype of `Response` trait? Well, we need to put in some leg work to be able to do that. In order to make it work we need to connect our circe `Decoder`s defined in the previous step with the unmarshalling infrastructure of `Akka HTTP`. Fortunately, this can be achieved fairly quickly with minimal overhead. All we need to do is provide an implicit instance of `FromEntityUnmarshaller[T]` with `T` being our response type we're trying to decode. Here's how this can be done with a few lines of code:
+
+```scala
+import akka.http.scaladsl.model.MediaTypes.`application/json`
+import akka.http.scaladsl.unmarshalling.{FromEntityUnmarshaller, Unmarshaller}
+import akka.util.ByteString
+import io.circe.{Decoder, jawn}
+
+object AkkaHttpCirceSupport extends AkkaHttpCirceSupport
+trait AkkaHttpCirceSupport {
+  private val jsonStringUnmarshaller = Unmarshaller.byteStringUnmarshaller
+    .forContentTypes(`application/json`)
+    .mapWithCharset {
+      case (ByteString.empty, _) => throw Unmarshaller.NoContentException
+      case (data, charset) => data.decodeString(charset.nioCharset.name)
+    }
+  implicit def circeUnmarshaller[A](implicit decoder: Decoder[A]): FromEntityUnmarshaller[A] =
+    jsonStringUnmarshaller.map(jawn.decode(_).fold(throw _, identity))
+}
+```
+
+Here we build on existing Akka HTTP functionality provided by `Unmarshaller.byteStringUnmarshaller` and decoding done by JSON facade `jawn` used internally by `circe` to generate our custom Unmarshaller instance. Phew, nuff boilerplate already, you may ask? We're almost there.
+
+We are now ready to make our HTTP call. We can use our implicitly provided `FromEntityUnmarshaller` in combination with the also implicitly defined `Decoder` instance for our response type `T` to decode the received HTTP response into the correct case class:
+
+```scala
+private def sendReceive[T <: Response : Decoder](req: HttpRequest): Future[T] =
+    Http().singleRequest(req).flatMap(r => Unmarshal(r.entity).to[T])
+
+def getAccountsList: Future[AccountsListResponse] = {
+  val req = // build request...
+  sendReceive[AccountsListResponse](req)
+}
+```
+
+As you can see here the entire communication chain is asynchronous and we're only operating with futures throughout. This is one of the advantages of Akka HTTP as it allows us to build our communication in a completely async manner without unnecessary blocking/waiting on the response to be received or unmarshalling to complete.
