@@ -12,9 +12,9 @@ enforce_ssl: msilb.com
 
 # Harmony theme configuration. Please change accordingly.
 harmony:
-  name: _msilb: Blog about building algorithmic trading systems with Scala
+  name: "_msilb: Blog about building algorithmic trading systems with Scala"
   # Little description about your site
-  description: This is my blog about building algorithmic trading systems with Scala
+  description: "This is my blog about building algorithmic trading systems with Scala"
   # 'meta_description:' Write an awesome description for your new site here.
   # It will appear in your document head meta (for Google search results) and 
   # in your feed.xml site description.
