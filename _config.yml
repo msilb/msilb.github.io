@@ -13,12 +13,12 @@ url: http://msilb.com
 harmony:
   name: _msilb
   # Little description about your site
-  description: Functional Programming, Web Development, Trading & Quantitative Finance
+  description: Blog about building algorithmic trading systems with Scala
   # 'meta_description:' Write an awesome description for your new site here.
   # It will appear in your document head meta (for Google search results) and 
   # in your feed.xml site description.
   meta_description: > # 
-   Michael Silbermann's Blog on Functional Programming, Web Development, Trading & Quantitative Finance
+   Blog about building algorithmic trading systems with Scala
   basetheme: theme-base-01 # pre defined thmes are darken, blue-water, redish.
   author: # Author details
     name: Michael Silbermann
