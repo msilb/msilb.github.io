@@ -14,12 +14,46 @@ I used [spray](http://spray.io) in the past and was more or less happy with it. 
 
 Long story short, eventually I had to abandon dispatch and went back to using Akka HTTP, which was at least mature enough, but more importantly, has the largest community behind it and is being actively maintained. My only piece of advice here for anyone who is starting a new project that requires HTTP client capabilities, don't waste your time experimenting with different Scala libraries and just pick the one that works, for me it is undoubtfully Akka HTTP.
 
-We don't want to bother users of our client library with low-level details of the HTTP communication, right? This means we need to be able to abstract away the JSON wire format into more robust Scala ADT based on `case class`es and `case object`s. So here is our next challenge: picking a JSON library. Again, plenty of alternatives out there and I have to say I haven't tried most of them. I used [spray-json](https://github.com/spray/spray-json) in the past, however the amount of boilerplate required to make it work was not ideal. That's when I discovered [circe](https://github.com/circe/circe), which seems to have a very active community behind it with gitter chat channel and growing number of SO questions. Circe is boasting fully automatic derivation for encoding/decoding your domain model (`case class`es and `case object`s) into/from JSON. In the simplest scenario all you need to do is provide one import where you want to use en-/decoding:
+We don't want to bother users of our client library with low-level details of the HTTP communication, right? This means we need to be able to abstract away the JSON wire format into a more robust Scala [ADT](https://en.wikipedia.org/wiki/Algebraic_data_type) model based on `case class`es and `case object`s. So here is our next challenge: picking a JSON library. Again, plenty of alternatives out there and I have to say I haven't tried most of them. I used [spray-json](https://github.com/spray/spray-json) in the past, however the amount of boilerplate required to make it work was not ideal. If you want to go with spray-json, the good news is that it comes with out-of-the-box support by Akka HTTP. However, in order to reduce the amount of boilerplate required for working with JSON I decided to look for alternatives. That's when I discovered [circe](https://github.com/circe/circe), which seemed to have a very active community behind it, has numerous Q&As on StackOverflow and even comes with its own gitter chat channel. Circe is boasting fully automatic derivation for encoding/decoding your domain model (`case class`es and `case object`s) into/from JSON. In the simplest scenario all you need to do is provide one import where you want to use en-/decoding:
 
 ```scala
 import io.circe.generic.auto._
 ```
 
 The rest is magically taken care of by Scala macros generating implicit instances of `Encoder` and `Decoder` objects. Looks good on paper, BUT: macros are not the most stable part of the Scala compiler (as we'll see in a second) and it will slow down your compilation by A LOT (at one point my [project](https://github.com/msilb/scalanda-v20) took 12 minutes to compile). Now, one particular issue I encountered when using fully automatic derivation is that circe is using [shapeless](https://github.com/milessabin/shapeless) under the hood to derive `Encoder` and `Decoder` instances, which in turn relies on Scala macros. This foundation seems to be not very rock solid though. Things like [this](https://issues.scala-lang.org/browse/SI-7046), [this](https://issues.scala-lang.org/browse/SI-7567) and [this](https://github.com/lloydmeta/enumeratum/issues/90) do not fill one with confidence. In fact, I encountered the same error as the author of the last linked github issue: `knownDirectSubclasses observed before subclass registered` and it just seemed completely random depending on in which file my case classes were defined and similar things. Only switching to a more reliable semi-automatic derivation using `Codec` annotation finally stabilized the build. However, the build still takes about 3-4 minutes to complete. I am thinking about abandoning `shapeless` backed derivation altogether and using more manual ways to define my `Encoder`s and `Decoder`s in order to speed up the compilation. This however, will bring back the boilerplate. Tradeoffs, it's always about tradeoffs.
+
+Ok, enough talk, let's see some code. First, let's start with the basic model design. We make a remote HTTP call to the API and can receive a `200` status code response with a JSON payload, or we get one of many error status codes `4xx`, again with optional JSON payload detailing the error message. Here is how we want to model it:
+
+```scala
+import io.circe.generic.semiauto.deriveDecoder
+import io.circe.Decoder
+
+sealed trait Response
+object Response {
+  ...
+  private def decodeSuccessOrFailure[T, S <: T : Decoder, F <: T : Decoder]: Decoder[T] = Decoder.instance { c =>
+    c.downField("errorMessage").as[String]
+      .flatMap(_ => c.as[F])
+      .left
+      .flatMap(_ => c.as[S])
+  }
+  sealed trait ConfigureAccountResponse extends Response
+  object ConfigureAccountResponse {
+    case class ConfigureAccountSuccessResponse(clientConfigureTransaction: ClientConfigureTransaction,
+                                               lastTransactionID: TransactionID) extends ConfigureAccountResponse
+    case class ConfigureAccountFailureResponse(clientConfigureRejectTransaction: Option[ClientConfigureRejectTransaction],
+                                               lastTransactionID: Option[TransactionID],
+                                               errorCode: Option[String],
+                                               errorMessage: String) extends ConfigureAccountResponse
+    implicit val decodeConfigureAccountSuccessResponse: Decoder[ConfigureAccountSuccessResponse] = deriveDecoder
+    implicit val decodeConfigureAccountFailureResponse: Decoder[ConfigureAccountFailureResponse] = deriveDecoder
+    implicit val decodeConfigureAccountResponse: Decoder[ConfigureAccountResponse] =
+      decodeSuccessOrFailure[ConfigureAccountResponse, ConfigureAccountSuccessResponse, ConfigureAccountFailureResponse]
+  }
+  ...
+}
+```
+
+Now let's have a close look at the signature of the `decodeSuccessOrFailure` function. It takes 3 type parameters: `T` is our base trait for a particular type of API response, `S` is mapping a successful response, and `F` a failure, both must be subtypes of `T` as indicated by the `<:` symbol. `: Decoder` is simply a Scala syntactic sugar for a so-called _implicit evidence_ parameter `implicit d: Decoder[T]`. This is required to let the compiler know that we can only accept type parameter `T` for which we have an implicit `Decoder` instance defined somewhere in scope. Ok, let's move on. So, when we receive our JSON object from the remote call, the compiler doesn't know whether it's a success or failure and which case class should the response be decoded into. We need to help it a little. For instance, we might infer from the structure of the JSON that the response is an error response. In this case we know that all error responses _must_ contain the field `errorMessage`, hence we attempt to decode the appropriate subtype of `T` depending on whether `errorMessage` is present in our JSON object or not.
 
 TBC...
