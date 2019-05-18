@@ -24,7 +24,7 @@ harmony:
   author: # Author details
     name: Michael Silbermann
     email: me@msilb.com
-    url: http://msilb.com
+    url: https://msilb.com
 
   # Google Analytics key, leave blank to ignore
   google_analytics_key: UA-58023443-1
@@ -34,7 +34,7 @@ harmony:
     github: msilb
     twitter: m_silb
     facebook: michael.silbermann
-    gplus: +MichaelSilbermann
+    gplus: 
     dribble: 
     pinterest: 
   # Toggle disclaimer in footer
