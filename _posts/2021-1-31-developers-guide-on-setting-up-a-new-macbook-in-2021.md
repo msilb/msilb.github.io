@@ -76,12 +76,6 @@ brew install --cask <cask_name> # install specified cask (GUI Application)
 brew search <formula_or_cask> # search online for available formulae and casks matching the specified substring, can also be applied to searching only formulae (add --formula) or to casks (add --cask)
 ```
 
-Here is the list of packages I would recommend to install using Homebrew:
-
-```
-
-```
-
 ## iTerm2
 
 While it is possible to use the standard out-of-the-box Terminal included with macOS, I would highly recommend to install [iTerm2](https://iterm2.com) as it offers a lot more options for customization than the default one. After we're done with our setup it would look something like this:
@@ -230,6 +224,10 @@ ripgrep is a modern replacement for `grep` and can do pretty much everything `gr
 ```
 
 You can also feel the difference in performance compared to `grep` especially on really big repos/directories.
+
+### Vim
+
+If you are using `vim` I would recommend to install [`vimrc`](https://github.com/amix/vimrc), which includes a great selection of plugins and customizations to make your editing work more enjoyable.
 
 ### Misc
 
