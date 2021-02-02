@@ -227,7 +227,9 @@ You can also feel the difference in performance compared to `grep` especially on
 
 ### Vim
 
-If you are using `vim` I would recommend to install [`vimrc`](https://github.com/amix/vimrc), which includes a great selection of plugins and customizations to make your editing work more enjoyable.
+If you are using `vim` as your editor of choice, I would recommend to install [`vimrc`](https://github.com/amix/vimrc), which includes a great selection of plugins and customizations to make your editing work more enjoyable:
+
+![vim](/assets/images/vim-nerd-tree.png)
 
 ### Misc
 
