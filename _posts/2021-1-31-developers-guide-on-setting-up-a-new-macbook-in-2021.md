@@ -58,7 +58,7 @@ Now we come to the juicy part: this is where we install our development tools. O
 
 Open the Terminal by hitting `⌘ + Space` to open Spotlight and type 'Terminal' (btw, don't forget to pin). First of all we need to do some ground work to get started. Type `xcode-select --install` into your Terminal window and hit Enter. This will install Xcode CLI tools.
 
-Next, we need to install [Brew](https://brew.sh) - the missing package manager for macOS:
+Next, we need to install [Homebrew](https://brew.sh) - the missing package manager for macOS:
 
 ```shell
 /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
