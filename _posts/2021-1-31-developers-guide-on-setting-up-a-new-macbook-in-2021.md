@@ -97,8 +97,7 @@ Now go open the Preferences with `⌘ + ,` and select the following:
     - It is recommended to copy the default profile, rename it to your username and set it as default to play around with settings and configure everything to your liking. Click `⌘ + =` to duplicate the Default profile and then set it as default from the 'Other Actions...' menu.
     - General tab: Set Working Directory to 'Reuse previous session's directory'
     - Colors tab: Click on 'Color Presets...', click 'Import' and select previously downloaded [`Solarized Dark - Patched`](https://github.com/mbadolato/iTerm2-Color-Schemes/blob/master/schemes/Solarized%20Dark%20-%20Patched.itermcolors)
-- Text
-    - [Pick, download and install](https://www.nerdfonts.com/font-downloads) your favorite Nerd font to use in your terminal. Those fonts include special glyphs that will make your Terminal a real Pro look once we install `Powerlevel10k`.
+    - Text tab: [Pick, download and install](https://www.nerdfonts.com/font-downloads) your favorite Nerd font to use in your terminal. Those fonts include special glyphs that will make your Terminal a real Pro look once we install `Powerlevel10k`.
 
 There are _a lot_ more options in iTerm2, too many to cover in this blog post, but this should do it for now.
 
