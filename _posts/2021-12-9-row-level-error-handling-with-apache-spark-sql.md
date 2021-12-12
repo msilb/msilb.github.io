@@ -5,7 +5,7 @@ comments: true
 excerpt_separator: <!--more-->
 ---
 
-If you're using Apache Spark SQL for running ETL jobs and applying data transformations between different domain models, you might be wondering what's the best way to deal with errors if some of the values cannot be mapped according to the specified business rules. In this blog post I would like to share one approach that can be used to filter out successful records and send to the next layer while quarantining failed records in a quarantine table. I'll be using PySpark and `DataFrame`s but the same concepts should apply when using Scala and `DataSet`s.
+If you're using [Apache Spark SQL](https://spark.apache.org/docs/latest/sql-programming-guide.html) for running ETL jobs and applying data transformations between different domain models, you might be wondering what's the best way to deal with errors if some of the values cannot be mapped according to the specified business rules. In this blog post I would like to share one approach that can be used to filter out successful records and send to the next layer while quarantining failed records in a quarantine table. I'll be using PySpark and `DataFrame`s but the same concepts should apply when using Scala and `DataSet`s.
 <!--more-->
 
 In the below example your task is to transform the input data based on data model A into the target model B. Let's assume your model A data lives in a delta lake area called Bronze and your model B data lives in the area called Silver. When applying transformations to the input data we can also validate it at the same time.
